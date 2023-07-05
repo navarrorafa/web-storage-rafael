@@ -5,8 +5,7 @@ const fragment = document.createDocumentFragment();
 
 
 let arrayProductos = ['Limón', 'Pera', 'Naranja', 'Manzana', 'Piña', 'Fresas', 'Melón']
-
-let arrayLocal = []
+let arrayFrutas = JSON.parse(localStorage.getItem('arrayFrutas')) || []
 
 
 document.addEventListener('click', (ev) => {
@@ -35,16 +34,26 @@ const pintarBotones = () => {
     listaProductos.append(fragment)
 
 }
+
 const almacenarArray = (valor) => {
-
-    arrayLocal.push(valor)
+    const encontrado = arrayFrutas.find((objFruta) => objFruta.nombre == valor)
+    if (encontrado) {
+        encontrado.cantidad++
+    } else {
+        arrayFrutas.push({
+            nombre: valor,
+            cantidad: 1
+        })
+    }
+    localStorage.setItem('frutas', JSON.stringify(arrayFrutas))
 }
 
-const agregarLocal = (valor) => {
-
-    localStorage.setItem
+const pintarCompra = () => {
+    arrayFrutas.forEach((item) => {
+        document.write(item.cantidad, item.nombre)
+    })
 }
 
+pintarBotones();
+console.log(arrayFrutas);
 
-
-pintarBotones()
