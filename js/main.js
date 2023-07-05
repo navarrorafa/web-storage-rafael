@@ -13,8 +13,8 @@ document.addEventListener('click', (ev) => {
     if (ev.target.matches('.btnAgregar')) {
         const valor = ev.target.value
 
-        almacenarArray(valor)
-
+        almacenarArray(valor);
+        pintarCompra();
     }
 })
 
@@ -22,10 +22,11 @@ const pintarBotones = () => {
 
     arrayProductos.forEach((item) => {
         let li = document.createElement('LI')
+        li.innerHTML = item
         let btn = document.createElement('BUTTON');
         btn.classList.add('btnAgregar')
         btn.value = item
-        btn.innerHTML = `Agregar ${item}`
+        btn.innerHTML = 'Agregar'
 
         li.append(btn)
         fragment.append(li)
@@ -50,10 +51,20 @@ const almacenarArray = (valor) => {
 
 const pintarCompra = () => {
     arrayFrutas.forEach((item) => {
-        document.write(item.cantidad, item.nombre)
+        let li = document.createElement('LI')
+        li.innerHTML = `${item.cantidad} ${item.nombre}`
+        let btn = document.createElement('BUTTON');
+        btn.classList.add('btnEliminar')
+        btn.value = item
+        btn.innerHTML = 'Eliminar'
+
+        li.append(btn)
+        fragment.append(li)
     })
+    lista.append(fragment)
 }
 
 pintarBotones();
-console.log(arrayFrutas);
+
+
 
