@@ -4,7 +4,7 @@ const lista = document.querySelector('#lista');
 const fragment = document.createDocumentFragment();
 
 
-let arrayProductos = ['Limón', 'Pera', 'Naranja', 'Manzana']
+let arrayProductos = ['Limón', 'Pera', 'Naranja', 'Manzana', 'Piña', 'Fresas', 'Melón']
 
 let arrayLocal = []
 
