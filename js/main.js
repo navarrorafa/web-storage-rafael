@@ -14,7 +14,7 @@ document.addEventListener('click', (ev) => {
         const valor = ev.target.value
 
         almacenarArray(valor);
-        pintarCompra();
+        pintarCompra()
     }
 })
 
@@ -50,7 +50,10 @@ const almacenarArray = (valor) => {
 }
 
 const pintarCompra = () => {
-    arrayFrutas.forEach((item) => {
+
+    lista.innerHTML = ''
+    arrayFrutas.forEach((item,index) => { 
+        
         let li = document.createElement('LI')
         li.innerHTML = `${item.cantidad} ${item.nombre}`
         let btn = document.createElement('BUTTON');
