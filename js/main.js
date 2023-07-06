@@ -2,6 +2,7 @@
 const listaProductos = document.querySelector('#listaProductos');
 const lista = document.querySelector('#lista');
 const fragment = document.createDocumentFragment();
+const btnReset = document.querySelector('#btnReset');
 
 
 let arrayProductos = ['Limón', 'Pera', 'Naranja', 'Manzana', 'Piña', 'Fresas', 'Melón']
@@ -20,6 +21,11 @@ document.addEventListener('click', (ev) => {
     if (ev.target.matches('.btnEliminar')) {
         const valor = ev.target.value
         eliminarCompra(valor);
+        limpiarLista();
+        pintarCompra();
+    }
+    if (ev.target.matches('.btnReset')) {
+        vaciarLocal();
         limpiarLista();
         pintarCompra();
     }
@@ -102,7 +108,13 @@ const limpiarLista = () => {
 //eliminar,IndexOf y un .splice y/o pasar el array de las frutas 
 //a un array de objetos
 
+const vaciarLocal = () => {
+    localStorage.removeItem('frutas');
+    arrayFrutas=[];
+}
+
 pintarBotones();
 pintarCompra();
+
 
 
