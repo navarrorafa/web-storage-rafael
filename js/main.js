@@ -5,7 +5,7 @@ const fragment = document.createDocumentFragment();
 
 
 let arrayProductos = ['Limón', 'Pera', 'Naranja', 'Manzana', 'Piña', 'Fresas', 'Melón']
-let arrayFrutas = JSON.parse(localStorage.getItem('arrayFrutas')) || []
+let arrayFrutas = JSON.parse(localStorage.getItem('frutas')) || []
 
 
 document.addEventListener('click', (ev) => {
@@ -14,7 +14,14 @@ document.addEventListener('click', (ev) => {
         const valor = ev.target.value
 
         almacenarArray(valor);
+        limpiarLista();
         pintarCompra()
+    }
+    if (ev.target.matches('.btnEliminar')) {
+        const valor = ev.target.value
+        eliminarCompra(valor);
+        limpiarLista();
+        pintarCompra();
     }
 })
 
@@ -46,19 +53,18 @@ const almacenarArray = (valor) => {
             cantidad: 1
         })
     }
-    localStorage.setItem('frutas', JSON.stringify(arrayFrutas))
+    almacenarLocal()
 }
 
 const pintarCompra = () => {
 
-    lista.innerHTML = ''
-    arrayFrutas.forEach((item,index) => { 
-        
+    arrayFrutas.forEach((item, index) => {
+
         let li = document.createElement('LI')
         li.innerHTML = `${item.cantidad} ${item.nombre}`
         let btn = document.createElement('BUTTON');
         btn.classList.add('btnEliminar')
-        btn.value = item
+        btn.value = item.nombre
         btn.innerHTML = 'Eliminar'
 
         li.append(btn)
@@ -67,7 +73,36 @@ const pintarCompra = () => {
     lista.append(fragment)
 }
 
-pintarBotones();
+const almacenarLocal = () => {
 
+    localStorage.setItem('frutas', JSON.stringify(arrayFrutas))
+}
+
+
+const eliminarCompra = (valor) => {
+    
+    const encontrado = arrayFrutas.find((objFruta) => objFruta.nombre == valor)
+    
+    if (encontrado) {
+        if (encontrado.cantidad > 1) {
+            encontrado.cantidad--
+        } else {
+            arrayFrutas = arrayFrutas.filter((obj)=>{return obj.nombre!=valor})
+
+        }
+    } /*else {
+        arrayFrutas = arrayFrutas.
+    }*/
+    almacenarLocal()
+}
+
+const limpiarLista = () => {
+    lista.innerHTML = ''
+}
+//eliminar,IndexOf y un .splice y/o pasar el array de las frutas 
+//a un array de objetos
+
+pintarBotones();
+pintarCompra();
 
 
